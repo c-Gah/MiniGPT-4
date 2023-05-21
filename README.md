@@ -1,3 +1,42 @@
+# Create service
+
+```
+sudo groupadd minigpt
+sudo useradd -r -s /bin/false -g minigpt minigpt
+sudo chown -R minigpt:minigpt /home/minigpt/
+sudo chown -R minigpt:minigpt /home/minigpt
+sudo chmod 775 -R /home/minigpt
+sudo chmod 755 -R /home/minigpt
+```
+
+```
+sudo nano /etc/systemd/system/fastapi.service
+```
+
+```
+[Unit]
+Description=FastAPI
+After=network.target
+
+[Service]
+ExecStart=/bin/bash -c 'source /opt/conda/bin/activate minigpt4 && /opt/conda/envs/minigpt4/bin/uvicorn rel:app --host 0.0.0.0 --port 8000'
+WorkingDirectory=/home/minigpt/
+User=minigpt
+Group=minigpt
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```
+sudo systemctl daemon-reload
+sudo systemctl start fastapi.service
+sudo systemctl enable fastapi.service
+sudo systemctl status fastapi.service
+```
+
+
 # MiniGPT-4: Enhancing Vision-language Understanding with Advanced Large Language Models
 [Deyao Zhu](https://tsutikgiau.github.io/)* (On Job Market!), [Jun Chen](https://junchen14.github.io/)* (On Job Market!), [Xiaoqian Shen](https://xiaoqian-shen.github.io), [Xiang Li](https://xiangli.ac.cn), and [Mohamed Elhoseiny](https://www.mohamed-elhoseiny.com/). *Equal Contribution
 
