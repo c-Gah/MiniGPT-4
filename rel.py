@@ -84,6 +84,37 @@ app.add_middleware(
 )
 
 # ========================================
+#             Supporting Functions
+# ========================================
+
+def check_cuda_memory():
+    # Ensure that a CUDA device is available
+    if torch.cuda.is_available():
+        # Get current device (GPU)
+        device = torch.cuda.current_device()
+        
+        # Get current memory allocation and total memory (in bytes)
+        current_memory = torch.cuda.memory_allocated(device)
+        max_memory = torch.cuda.max_memory_allocated(device)
+
+        # Convert bytes to gigabytes
+        current_memory_gb = current_memory / (1024 ** 3)
+        max_memory_gb = max_memory / (1024 ** 3)
+
+        # Compute memory usage percentage
+        memory_usage_percentage = (current_memory / max_memory) * 100
+
+        print(f'Current memory usage: {current_memory_gb} GB')
+        print(f'Max memory usage: {max_memory_gb} GB')
+        print(f'Memory usage percentage: {memory_usage_percentage}%')
+
+        if memory_usage_percentage >= 90:
+            print('Memory usage is more than 90%. Exiting...')
+            exit(0)
+    else:
+        print('CUDA is not available on this machine')
+
+# ========================================
 #             FastAPI Setting
 # ========================================
 @app.get("/hello")
@@ -93,6 +124,8 @@ async def hello_world():
     
 @app.post("/upload_ask_answer")
 async def upload_ask_answer(file: UploadFile = File(...), question: str = Form(...)):
+    check_cuda_memory()
+
     # Read image file
     contents = await file.read()
     image = Image.open(io.BytesIO(contents))
