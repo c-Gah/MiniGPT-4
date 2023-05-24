@@ -25,21 +25,20 @@ sudo apt-get install -y nano
 # Install uvicorn
 sudo apt-get install -y uvicorn
 
-# Download the llama-7b-minigpt.tar file from Google Drive
+# Install gdown using pip3
+sudo pip3 install gdown
+
+# Download the llama-7b-minigpt.tar file from Google Drive using gdown
 file_id="1vbpJ9cRxZPTQMMs9N6UAE2ygBP85ct3U"
 file_name="llama-7b-minigpt.tar"
 output_file="/usr/local/minigpt4/llama/$file_name"
-temp_dir=$(mktemp -d)
-wget --no-check-certificate "https://docs.google.com/uc?export=download&id=$file_id" -O "$temp_dir/$file_name"
+gdown --id "$file_id" --output "$output_file"
 
 # Create the /usr/local/minigpt4/llama directory
 sudo mkdir -p /usr/local/minigpt4/llama
 
 # Extract the contents of the llama-7b-minigpt.tar file to /usr/local/minigpt4/llama
-sudo tar -xf "$temp_dir/$file_name" -C /usr/local/minigpt4/llama
-
-# Clean up the temporary directory
-rm -rf "$temp_dir"
+sudo tar -xf "$output_file" -C /usr/local/minigpt4/llama
 
 # Create the minigpt.service file with the updated service contents
 cat <<EOF | sudo tee /etc/systemd/system/minigpt.service
@@ -59,5 +58,10 @@ RestartSec=360s
 WantedBy=multi-user.target
 EOF
 
-sudo systemctl enable minigpt.service
-sudo systemctl start minigpt.service
+# Enable the minigpt service to start on boot
+# sudo systemctl enable minigpt.service
+sudo service minigpt enable
+
+# Start the minigpt service
+# sudo systemctl start minigpt.service
+sudo service minigpt start
