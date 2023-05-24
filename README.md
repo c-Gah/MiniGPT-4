@@ -1,33 +1,39 @@
 # Create service
 
 ```
-sudo groupadd minigpt
-sudo useradd -r -s /bin/false -g minigpt minigpt
-sudo chown -R minigpt:minigpt /home/minigpt/
-sudo chown -R minigpt:minigpt /home/minigpt
-sudo chmod 775 -R /home/minigpt
-sudo chmod 755 -R /home/minigpt
+chmod +x setup.sh
 ```
 
 ```
-sudo nano /etc/systemd/system/fastapi.service
+sudo groupadd minigpt
+sudo useradd -r -s /bin/false -g minigpt minigpt
+sudo chown -R minigpt:minigpt /usr/local/minigpt/
+sudo chmod 755 -R /home/minigpt
+sudo chmod 775 -R /home/minigpt
+```
+
+```
+sudo nano /etc/systemd/system/minigpt.service
 ```
 
 ```
 [Unit]
-Description=FastAPI
+Description=MiniGPT4
 After=network.target
 
 [Service]
-ExecStart=/bin/bash -c 'source /opt/conda/bin/activate minigpt4 && /opt/conda/envs/minigpt4/bin/uvicorn rel:app --host 0.0.0.0 --port 8000'
+ExecStart=/bin/bash -c 'source /opt/conda/bin/activate minigpt4 && /opt/conda/envs/minigpt4/bin/uvicorn main:app --host 0.0.0.0 --port 8000'
 WorkingDirectory=/home/minigpt/
 User=minigpt
 Group=minigpt
-Restart=always
+Restart=on-failure
+RestartSec=360s
 
 [Install]
 WantedBy=multi-user.target
 ```
+
+https://drive.google.com/file/d/1vbpJ9cRxZPTQMMs9N6UAE2ygBP85ct3U/view?usp=share_link
 
 ```
 sudo systemctl daemon-reload
