@@ -26,7 +26,8 @@ sudo apt-get install -y nano
 sudo apt-get install -y uvicorn
 
 # Create the /usr/local/minigpt4/llama directory
-sudo mkdir -p /usr/local/minigpt4/llama
+sudo mkdir -p /usr/local/minigpt4/llama/7b
+sudo mkdir -p /usr/local/minigpt4/llama/checkpoint
 
 # Download the llama-7b-minigpt.tar file from Google Cloud Storage using wget
 file_name="llama-7b-minigpt.tar"
