@@ -1,7 +1,12 @@
 # Create service
 
 ```
+sudo apt update -y
+sudo apt upgrade -y
+git clone https://github.com/c-Gah/MiniGPT-4.git
+cd MiniGPT-4
 chmod +x setup.sh
+./setup.sh
 ```
 
 ```

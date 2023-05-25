@@ -30,11 +30,16 @@ sudo mkdir -p /usr/local/minigpt4/llama
 
 # Download the llama-7b-minigpt.tar file from Google Cloud Storage using wget
 file_name="llama-7b-minigpt.tar"
-output_file="/usr/local/minigpt4/llama/$file_name"
+output_file="/usr/local/minigpt4/llama/7b/$file_name"
 sudo wget https://storage.googleapis.com/poc_llama/llama-7b-minigpt.tar -O "$output_file"
 
-# Extract the contents of the llama-7b-minigpt.tar file to /usr/local/minigpt4/llama
-sudo tar -xf "$output_file" -C /usr/local/minigpt4/llama
+# Extract the contents of the llama-7b-minigpt.tar file to /usr/local/minigpt4/llama/7b
+sudo tar -xf "$output_file" -C /usr/local/minigpt4/llama/7b
+
+# Download the llama-7b-minigpt.tar file from Google Cloud Storage using wget
+file_name="prerained_minigpt4_7b.pth"
+output_file="/usr/local/minigpt4/llama/checkpoint/$file_name"
+sudo wget https://storage.googleapis.com/poc_llama/prerained_minigpt4_7b.pth -O "$output_file"
 
 # Create the minigpt.service file with the updated service contents
 cat <<EOF | sudo tee /etc/systemd/system/minigpt.service
