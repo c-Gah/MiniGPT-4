@@ -1,6 +1,10 @@
 # Create service
 
 ```
+-p 8080:8080 -p 8081:8081 -p 5000:5000 -p 8000:8000
+```
+
+```
 sudo apt update -y
 sudo apt upgrade -y
 git clone https://github.com/c-Gah/MiniGPT-4.git

@@ -22,11 +22,13 @@ sudo chmod 775 -R /home/minigpt4_u
 sudo apt-get update
 sudo apt-get install -y nano
 
-sudo wget https://repo.anaconda.com/archive/Anaconda3-2023.03-1-Linux-x86_64.sh
+file_name="Anaconda3-2023.03-1-Linux-x86_64.sh"
+output_file="/usr/local/$file_name"
+sudo wget https://repo.anaconda.com/archive/Anaconda3-2023.03-1-Linux-x86_64.sh -O "$output_file"
 
-bash ~/Anaconda3-2023.03-1-Linux-x86_64.sh -b -p /usr/local/anaconda3
+bash "/usr/local/$file_name" -b -p /usr/local/anaconda3
 
-sudo rm ~/Anaconda3-2023.03-1-Linux-x86_64.sh
+sudo rm "/usr/local/$file_name"
 
 sudo /usr/local/anaconda3/bin/conda env create -f /usr/local/minigpt4/environment.yml
 sudo /usr/local/anaconda3/bin/conda activate minigpt4
