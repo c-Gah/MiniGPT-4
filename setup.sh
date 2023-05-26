@@ -22,8 +22,14 @@ sudo chmod 775 -R /home/minigpt4_u
 sudo apt-get update
 sudo apt-get install -y nano
 
-# Install uvicorn
-sudo apt-get install -y uvicorn
+sudo wget https://repo.anaconda.com/archive/Anaconda3-2023.03-1-Linux-x86_64.sh
+
+bash ~/Anaconda3-2023.03-1-Linux-x86_64.sh -b -p /usr/local/anaconda3
+
+sudo rm ~/Anaconda3-2023.03-1-Linux-x86_64.sh
+
+sudo /usr/local/anaconda3/bin/conda env create -f /usr/local/minigpt4/environment.yml
+sudo /usr/local/anaconda3/bin/conda activate minigpt4
 
 # Create the /usr/local/minigpt4/llama directory
 sudo mkdir -p /usr/local/minigpt4/llama/7b

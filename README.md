@@ -7,6 +7,7 @@ git clone https://github.com/c-Gah/MiniGPT-4.git
 cd MiniGPT-4
 chmod +x setup.sh
 ./setup.sh
+/usr/local/anaconda3/bin/conda main:app --host 0.0.0.0 --port 8000
 ```
 
 ```
