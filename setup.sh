@@ -64,6 +64,7 @@ conda init bash
 source ~/.bashrc
 conda activate minigpt4
 
+
 # Create the minigpt.service file with the updated service contents
 cat <<EOF | sudo tee /etc/systemd/system/minigpt.service
 [Unit]
