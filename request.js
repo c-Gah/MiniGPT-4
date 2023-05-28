@@ -9,7 +9,7 @@ async function sendImage() {
     formData.append("question", "What is the image about");
 
     // Send the image and question to the server
-    const response = await fetch("http://35.203.63.85:8000/upload_ask_answer", {
+    const response = await fetch("http://81.166.173.12:10156/upload_ask_answer", {
         method: 'POST',
         body: formData,
     });
@@ -25,5 +25,18 @@ async function sendImage() {
     console.log(data.answer);
 }
 
+function sendImagesRepeatedly() {
+    let i = 0;
+    const intervalId = setInterval(() => {
+        if (i >= 10) {
+            clearInterval(intervalId); // stop when 100 requests have been sent
+        } else {
+            sendImage();
+            console.log("sent request")
+            i++;
+        }
+    }, 1000);
+}
+
 // Call the function
-sendImage();
+sendImagesRepeatedly();

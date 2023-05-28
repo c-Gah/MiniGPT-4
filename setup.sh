@@ -24,26 +24,29 @@ sudo apt-get upgrade -y
 sudo apt-get install -y nano
 sudo apt-get install -y build-essential
 sudo apt-get install -y libgl1-mesa-glx
-sudo apt-get install -y cron
+# sudo apt-get install -y cron
 
 
 # Create the /usr/local/minigpt4/llama directory
-sudo mkdir -p /usr/local/minigpt4/llama/7b
+sudo mkdir -p /usr/local/minigpt4/llama/data
 sudo mkdir -p /usr/local/minigpt4/llama/checkpoint
 
 # Download the llama-7b-minigpt.tar file from Google Cloud Storage using wget
-file_name="llama-7b-minigpt.tar"
-output_file="/usr/local/minigpt4/llama/7b/$file_name"
-sudo wget https://storage.googleapis.com/poc_llama/llama-7b-minigpt.tar -O "$output_file"
+# file_name="llama-7b-minigpt.tar"
+file_name="llama-13b-minigpt.tar"
+output_file="/usr/local/minigpt4/llama/data/$file_name"
+# sudo wget https://storage.googleapis.com/poc_llama/llama-7b-minigpt.tar -O "$output_file"
+sudo wget "https://storage.googleapis.com/poc_llama/$file_name" -O "$output_file"
 
-# Extract the contents of the llama-7b-minigpt.tar file to /usr/local/minigpt4/llama/7b
-sudo tar -xf "$output_file" -C /usr/local/minigpt4/llama/7b
+# Extract the contents of the llama-7b-minigpt.tar file to /usr/local/minigpt4/llama/data
+sudo tar -xf "$output_file" -C /usr/local/minigpt4/llama/data
 sudo rm "$output_file"
 
 # Download the llama-7b-minigpt.tar file from Google Cloud Storage using wget
-file_name="prerained_minigpt4_7b.pth"
+# file_name="prerained_minigpt4_7b.pth"
+file_name="pretrained_minigpt4_13b.pth"
 output_file="/usr/local/minigpt4/llama/checkpoint/$file_name"
-sudo wget https://storage.googleapis.com/poc_llama/prerained_minigpt4_7b.pth -O "$output_file"
+sudo wget "https://storage.googleapis.com/poc_llama/$file_name" -O "$output_file"
 
 # file_name="Anaconda3-2023.03-1-Linux-x86_64.sh"
 # output_file="/usr/local/$file_name"

@@ -5,9 +5,19 @@
 ```
 
 ```
+curl -s https://raw.githubusercontent.com/c-Gah/MiniGPT-4/main/setup.sh | bash > output.log 2>&1
+```
+
+```
+./setup.sh > output.log 2>&1
+```
+
+
+```
 sudo apt update -y
 sudo apt upgrade -y
 git clone https://github.com/c-Gah/MiniGPT-4.git
+ > output.log
 cd MiniGPT-4
 chmod +x setup.sh
 ./setup.sh
