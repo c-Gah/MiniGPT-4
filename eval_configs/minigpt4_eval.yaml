@@ -8,7 +8,7 @@ model:
   low_resource: True
   prompt_path: "prompts/alignment.txt"
   prompt_template: '###Human: {} ###Assistant: '
-  ckpt: '/usr/local/minigpt4/llama/checkpoint/prerained_minigpt4_7b.pth'
+  ckpt: '/usr/local/minigpt4/llama/checkpoint/pretrained_minigpt4_13b.pth'
 
 
 datasets:

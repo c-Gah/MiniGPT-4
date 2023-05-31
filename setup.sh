@@ -24,6 +24,7 @@ sudo apt-get upgrade -y
 sudo apt-get install -y nano
 sudo apt-get install -y build-essential
 sudo apt-get install -y libgl1-mesa-glx
+sudo apt-get install -y psmisc
 # sudo apt-get install -y cron
 
 
