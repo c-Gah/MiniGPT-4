@@ -24,45 +24,6 @@ chmod +x setup.sh
 /usr/local/anaconda3/bin/conda main:app --host 0.0.0.0 --port 8000
 ```
 
-```
-sudo groupadd minigpt
-sudo useradd -r -s /bin/false -g minigpt minigpt
-sudo chown -R minigpt:minigpt /usr/local/minigpt/
-sudo chmod 755 -R /home/minigpt
-sudo chmod 775 -R /home/minigpt
-```
-
-```
-sudo nano /etc/systemd/system/minigpt.service
-```
-
-```
-[Unit]
-Description=MiniGPT4
-After=network.target
-
-[Service]
-ExecStart=/bin/bash -c 'source /opt/conda/bin/activate minigpt4 && /opt/conda/envs/minigpt4/bin/uvicorn main:app --host 0.0.0.0 --port 8000'
-WorkingDirectory=/home/minigpt/
-User=minigpt
-Group=minigpt
-Restart=on-failure
-RestartSec=360s
-
-[Install]
-WantedBy=multi-user.target
-```
-
-https://drive.google.com/file/d/1vbpJ9cRxZPTQMMs9N6UAE2ygBP85ct3U/view?usp=share_link
-
-```
-sudo systemctl daemon-reload
-sudo systemctl start fastapi.service
-sudo systemctl enable fastapi.service
-sudo systemctl status fastapi.service
-```
-
-
 # MiniGPT-4: Enhancing Vision-language Understanding with Advanced Large Language Models
 [Deyao Zhu](https://tsutikgiau.github.io/)* (On Job Market!), [Jun Chen](https://junchen14.github.io/)* (On Job Market!), [Xiaoqian Shen](https://xiaoqian-shen.github.io), [Xiang Li](https://xiangli.ac.cn), and [Mohamed Elhoseiny](https://www.mohamed-elhoseiny.com/). *Equal Contribution
 
