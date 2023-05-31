@@ -141,46 +141,7 @@ async def upload_ask_answer(file: UploadFile = File(...), question: str = Form(.
     # Answer
     answer = chat.answer(conv=chat_state,
                               img_list=img_list,
-                              num_beams=1,
-                              temperature=1.0,
-                              max_new_tokens=300,
-                              max_length=2000)[0]
-
-    # Reset GPU memory
-    torch.cuda.empty_cache()
-
-    # Return response
-    return {"answer": answer}
-    
-@app.post("/upload_ask_answer2")
-async def upload_ask_answer(file: UploadFile = File(...), question: str = Form(...)):    
-    # Read image file
-    contents = await file.read()
-    if contents is None:
-        return {"status": "failure", "reason": "No image uploaded"}
-    image = Image.open(io.BytesIO(contents))
-
-    # Apply necessary transformations: resize, normalize, etc.
-    transform = transforms.Compose([
-        transforms.Resize((224, 224)),  # adjust size if necessary
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])  # adjust normalization if necessary
-    ])
-    
-    img_tensor = transform(img_pil).unsqueeze(0)  # add batch dimension
-    
-    # Image Processing
-    chat_state = CONV_VISION.copy()
-    img_list = []
-    llm_message = chat.upload_img(img_tensor, chat_state, img_list)
-
-    # Ask
-    chat.ask(question, chat_state)
-    
-    # Answer
-    answer = chat.answer(conv=chat_state,
-                              img_list=img_list,
-                              num_beams=1,
+                              num_beams=5,
                               temperature=1.0,
                               max_new_tokens=300,
                               max_length=2000)[0]
