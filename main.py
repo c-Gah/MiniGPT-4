@@ -121,7 +121,11 @@ def check_cuda_memory():
 async def hello_world():
     return {"message": "Hello, World!"}
     
-    
+@app.get("/health_check")
+async def health_check():
+    return "augmented_aisles_response"
+
+
 @app.post("/upload_ask_answer")
 async def upload_ask_answer(file: UploadFile = File(...), question: str = Form(...)):
     # check_cuda_memory()
