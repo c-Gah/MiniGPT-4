@@ -69,6 +69,9 @@ source ~/.bashrc
 conda activate minigpt4
 
 
+# openssl req -x509 -out /usr/local/minigpt4/certs/localhost.crt -keyout /usr/local/minigpt4/certs/localhost.key -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' -extensions EXT -config <( printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+
+
 # Create the minigpt.service file with the updated service contents
 cat <<EOF | sudo tee /etc/systemd/system/minigpt.service
 [Unit]
@@ -145,6 +148,8 @@ do_start() {
 		
 		# Dev
 		nohup /bin/bash -c 'cd /usr/local/minigpt4 && source /usr/local/miniconda/bin/activate minigpt4 && uvicorn main:app --host 0.0.0.0 --port 8000' &
+		
+		# nohup /bin/bash -c 'cd /usr/local/minigpt4 && source /usr/local/miniconda/bin/activate minigpt4 && uvicorn main:app --host 0.0.0.0 --port 8000 --ssl-keyfile=/usr/local/minigpt4/certs/localhost.key --ssl-certfile=/usr/local/minigpt4/certs/localhost.crt' &
 		
 		# Prod
 		# nohup /bin/bash -c 'cd /usr/local/minigpt4 && source /usr/local/miniconda/bin/activate minigpt4 && uvicorn main:app --host 0.0.0.0 --port 8000 > /dev/null 2>&1' &

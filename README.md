@@ -5,24 +5,19 @@
 ```
 
 ```
-curl -s https://raw.githubusercontent.com/c-Gah/MiniGPT-4/main/setup.sh | bash > output.log 2>&1
+sudo apt update -y
+sudo apt upgrade -y
+wget https://raw.githubusercontent.com/c-Gah/MiniGPT-4/main/setup.sh
+chmod +x setup.sh
+./setup.sh
 ```
 
 ```
+curl -s https://raw.githubusercontent.com/c-Gah/MiniGPT-4/main/setup.sh | bash > output.log 2>&1
 ./setup.sh > output.log 2>&1
 ```
 
 
-```
-sudo apt update -y
-sudo apt upgrade -y
-git clone https://github.com/c-Gah/MiniGPT-4.git
- > output.log
-cd MiniGPT-4
-chmod +x setup.sh
-./setup.sh
-/usr/local/anaconda3/bin/conda main:app --host 0.0.0.0 --port 8000
-```
 
 # MiniGPT-4: Enhancing Vision-language Understanding with Advanced Large Language Models
 [Deyao Zhu](https://tsutikgiau.github.io/)* (On Job Market!), [Jun Chen](https://junchen14.github.io/)* (On Job Market!), [Xiaoqian Shen](https://xiaoqian-shen.github.io), [Xiang Li](https://xiangli.ac.cn), and [Mohamed Elhoseiny](https://www.mohamed-elhoseiny.com/). *Equal Contribution
