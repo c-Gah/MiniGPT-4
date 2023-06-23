@@ -9,7 +9,7 @@ async function sendImage() {
     formData.append("question", "What is the image about");
 
     // Send the image and question to the server
-    const response = await fetch("http://81.166.173.12:10156/upload_ask_answer", {
+    const response = await fetch("https://app.luckybelle.io/proxy/upload_ask_answer", {
         method: 'POST',
         body: formData,
     });
@@ -28,7 +28,7 @@ async function sendImage() {
 function sendImagesRepeatedly() {
     let i = 0;
     const intervalId = setInterval(() => {
-        if (i >= 10) {
+        if (i >= 2) {
             clearInterval(intervalId); // stop when 100 requests have been sent
         } else {
             sendImage();
